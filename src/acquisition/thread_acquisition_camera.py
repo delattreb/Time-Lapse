@@ -8,7 +8,7 @@ import sqlite3
 import threading
 import time
 
-from lib import com_camera, com_config, com_logger
+from lib import com_camera, com_config, com_gpio_inout, com_logger
 
 
 class ThreadAcquisitionCamera(threading.Thread):
@@ -34,6 +34,10 @@ class ThreadAcquisitionCamera(threading.Thread):
             
             connection = sqlite3.Connection(self.database)
             cursor = connection.cursor()
+
+            # Blink at each picture taken
+            gpioinout = com_gpio_inout.GPIOINOT()
+            gpioinout.blink(0.4, 1)
             
             instance.getpicture(connection, cursor)
             

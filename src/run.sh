@@ -1,6 +1,5 @@
 #!/bin/sh
 
-cd /home/project/StratoBalloon/
-pigpiod
+cd /home/project/TimeLapse/
 python3.4 main.py
-pkill pigpiod
+

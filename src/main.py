@@ -10,7 +10,8 @@ import lcd
 from acquisition import thread_acquisition_camera
 from lib import com_config, com_gpio_inout, com_logger
 
-# TODO try catch on all thread acquisition
+# TODO while stop button
+# TODO Wait start button
 
 # Config
 com_config.setconfig()
@@ -28,12 +29,9 @@ lcd.splash()
 
 gpioinout = com_gpio_inout.GPIOINOT()
 # Waiting for Init acquisition
-"""
+
 while not gpioinout.getacquisition():
     logger.info('Wait for input acquisition')
-    lcd.displatSensor()
-"""
-gpioinout.blink(0.2, 5)
 
 logger.info('Wait for trigger')
 lcd.displaystartacquisition()
