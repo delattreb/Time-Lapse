@@ -11,7 +11,8 @@ from lib import com_config, com_logger, com_ssd1306
 
 class LCD:
     def __init__(self):
-        self.config = com_config.getconfig()
+        conf = com_config.Config()
+        self.config = conf.getconfig()
         self.lcd = com_ssd1306.SSD1306()
     
     def displayoff(self):
@@ -27,6 +28,11 @@ class LCD:
         
         self.lcd.display()
         time.sleep(splashduration)
+
+    def wait(self):
+        self.lcd.clear()
+        self.lcd.text(1, 25, 'Wait...', 2)
+        self.lcd.display()
     
     def displaystartacquisition(self):
         logger = com_logger.Logger()

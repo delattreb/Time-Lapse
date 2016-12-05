@@ -14,7 +14,8 @@ from lib import com_config
 
 class Logger:
     def __init__(self, name = ''):
-        self.config = com_config.getconfig()
+        conf = com_config.Config()
+        self.config = conf.getconfig()
         self.logger = logging.Logger(name, logging.DEBUG)
         self.logger.name = name
         

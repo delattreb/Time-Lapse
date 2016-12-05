@@ -11,7 +11,8 @@ from lib import com_config
 
 class SQLite:
     def __init__(self):
-        config = com_config.getconfig()
+        conf = com_config.Config()
+        config = conf.getconfig()
         self.connection = sqlite3.Connection(config['SQLITE']['database'])
         self.cursor = self.connection.cursor()
     

@@ -13,28 +13,43 @@ class GPIOINOT:
     def __init__(self):
         self.gpio = com_gpio.GPIODialog('LED ACQUISITION')
         self.gpio.setmodebcm()
-        self.config = com_config.getconfig()
+
+        conf = com_config.Config()
+        self.config = conf.getconfig()
         
         # LED ACQUISITION
         self.led_acquisition = int(self.config['GPIO']['LED_ACQUISITION'])
         self.gpio.setup(self.led_acquisition, self.gpio.OUT)
-        
-        # INPUT ACQUISITION
-        self.input_acquisition = int(self.config['GPIO']['INPUT_ACQUISITION'])
-        self.gpio.setuppud(self.input_acquisition, self.gpio.IN, self.gpio.PUD_DOWN)
+
+        # START ACQUISITION
+        self.start_acquisition = int(self.config['GPIO']['START_ACQUISITION'])
+        self.gpio.setuppud(self.start_acquisition, self.gpio.IN, self.gpio.PUD_DOWN)
+
+        # STOP ACQUISITION
+        self.stop_acquisition = int(self.config['GPIO']['STOP_ACQUISITION'])
+        self.gpio.setuppud(self.stop_acquisition, self.gpio.IN, self.gpio.PUD_DOWN)
     
     def setacquisition(self, state):
         self.gpio.setio(self.led_acquisition, state)
         
         logger = com_logger.Logger('LED_ACQUISITION')
-        logger.debug('LED ' + str(state))
-    
-    def getacquisition(self):
-        state = self.gpio.getio(self.input_acquisition)
+        logger.debug('LED: ' + str(state))
+
+    def getstart(self):
+        state = self.gpio.getio(self.start_acquisition)
         
         if state:
-            logger = com_logger.Logger('INPUT_ACQUISITION')
-            logger.debug('INPUT ' + str(state))
+            logger = com_logger.Logger('START_ACQUISITION')
+            logger.debug('INPUT START')
+    
+        return state
+
+    def getstop(self):
+        state = self.gpio.getio(self.stop_acquisition)
+    
+        if state:
+            logger = com_logger.Logger('STOP_ACQUISITION')
+            logger.debug('INPUT STOP')
         
         return state
     

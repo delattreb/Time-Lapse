@@ -34,8 +34,9 @@ class Camera:
         if PiCamera is not None:
             self.imgName = 'PIC_'
             self.vidName = 'VID_'
-            
-            config = com_config.getconfig()
+
+            conf = com_config.Config()
+            config = conf.getconfig()
             logger = com_logger.Logger('CAMERA')
             
             self.camera = PiCamera()
