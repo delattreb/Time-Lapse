@@ -89,3 +89,4 @@ ENV/
 !/src/lib/
 /pythonenv/
 !/pythonenv/requirements.txt
+/src/log
