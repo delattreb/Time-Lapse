@@ -28,12 +28,12 @@ class ThreadAcquisitionCamera(threading.Thread):
     def run(self):
         logger = com_logger.Logger('Camera Thread')
         logger.info('Start')
-        self.getpicture(self.delay, self.counter)
+        self.getpicture()
         logger.info('Stop')
-    
-    def getpicture(self, delay, counter):
+
+    def getpicture(self):
         instance = com_camera.Camera('PICTURE')
-        while counter and not self.gpioinout.getstop():
+        while self.counter and not self.gpioinout.getstop():
             self.lock.acquire()
             connection = sqlite3.Connection(self.database)
             cursor = connection.cursor()
@@ -43,6 +43,6 @@ class ThreadAcquisitionCamera(threading.Thread):
             # Blink at each picture taken
             gpioinout = com_gpio_inout.GPIOINOT()
             gpioinout.blink(0.04, 1)
-            
-            counter -= 1
-            time.sleep(delay)
+
+            self.counter -= 1
+            time.sleep(self.delay)

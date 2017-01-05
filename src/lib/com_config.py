@@ -13,8 +13,7 @@ config_file = "config/config.ini"
 class Config:
     def __init__(self):
         self.config = configparser.ConfigParser()
-        pass
-    
+
     def setconfig(self):
         acquisitionduration = 3  # In hours
         
@@ -23,8 +22,9 @@ class Config:
         self.config['APPLICATION'] = {}
         self.config['APPLICATION']['name'] = 'Time Lapse'
         self.config['APPLICATION']['version'] = '1.0.0'
-        self.config['APPLICATION']['author'] = '© Bruno DELATTRE'
-        
+        self.config['APPLICATION']['author'] = 'c Bruno DELATTRE'
+        self.config['APPLICATION']['splashduration'] = '5'
+
         # Acquisition
         self.config['ACQUISITION'] = {}
         self.config['ACQUISITION']['trigger'] = '5'
@@ -35,15 +35,7 @@ class Config:
         self.config['LOGGER']['levelfile'] = '20'
         self.config['LOGGER']['logfile'] = 'log'
         self.config['LOGGER']['logfilesize'] = '1000000'
-        
-        # Export
-        self.config['EXPORT'] = {}
-        self.config['EXPORT']['directoryimage'] = 'pictures'
-        
-        # SQLite
-        self.config['SQLITE'] = {}
-        self.config['SQLITE']['database'] = 'database.db'
-        
+
         # Camera v8M 3280x2464 -- v5M 2592x1944
         self.config['CAMERA'] = {}
         self.config['CAMERA']['pic_resolution_x'] = '2592'
@@ -63,7 +55,7 @@ class Config:
         # off, auto, sun, cloud, shade, tungsten, fluorescent, incandescent, flash, horizon
         self.config['CAMERA']['awb'] = 'auto'
         self.config['CAMERA']['picture_path'] = 'pictures/'
-        self.config['CAMERA']['delay'] = '3'
+        self.config['CAMERA']['delay'] = '10'
         self.config['CAMERA']['nb'] = str(int(((acquisitionduration * 3600) / float(self.config['CAMERA']['delay']))))
         
         # GPIO
@@ -74,7 +66,14 @@ class Config:
         self.config['GPIO']['START_ACQUISITION'] = '17'
         self.config['GPIO']['STOP_ACQUISITION'] = '27'
         # endregion
-        
+
+        # Export
+        self.config['EXPORT'] = {}
+        self.config['EXPORT']['directoryimage'] = 'pictures'
+
+        # SQLite
+        self.config['SQLITE'] = {}
+        self.config['SQLITE']['database'] = 'database.db'
         base_dir = os.path.dirname(os.path.abspath(__file__))
         db_path = os.path.join(base_dir, config_file)
         with open(db_path, 'w') as configfile:

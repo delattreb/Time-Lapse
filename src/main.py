@@ -17,7 +17,7 @@ config = conf.getconfig()
 
 # Log
 logger = com_logger.Logger()
-logger.info('Application start')
+logger.info(config['APPLICATION']['name'] + '' + config['APPLICATION']['version'] + ' ' + 'start')
 
 # LCD
 lcd = lcd.LCD()
@@ -42,3 +42,5 @@ threadlock = threading.Lock()
 camera_thread = thread_acquisition_camera.ThreadAcquisitionCamera("Camera Thread", threadlock, float(config['CAMERA']['delay']), int(config['CAMERA']['nb']))
 camera_thread.start()
 camera_thread.join()
+
+logger.info('Application stop')

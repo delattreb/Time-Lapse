@@ -19,7 +19,6 @@ class LCD:
         self.lcd.offscreen()
     
     def splash(self):
-        splashduration = 3
         self.lcd.clear()
         self.lcd.rectangle(0, 0, self.lcd.width_max - 1, self.lcd.height_max - 1)
         self.lcd.text(4, 1, self.config['APPLICATION']['name'], 2)
@@ -27,7 +26,7 @@ class LCD:
         self.lcd.text(4, 49, self.config['APPLICATION']['author'], 0)
         
         self.lcd.display()
-        time.sleep(splashduration)
+        time.sleep(int(self.config['APPLICATION']['splashduration']))
 
     def wait(self):
         self.lcd.clear()

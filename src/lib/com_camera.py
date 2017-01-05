@@ -11,7 +11,7 @@ try:
 except Exception as exp:
     PiCamera = None
 
-from time import sleep
+import time
 
 from dal import dal_camera, dal_picture
 from lib import com_config, com_logger
@@ -65,8 +65,12 @@ class Camera:
             dalpicture = dal_picture.DALPicture(connection, cursor)
             
             index = dalcamera.get_last_picture_id()
+
             name = self.path + self.imgName + str(index) + '.jpg'
-            self.camera.capture(name)
+            self.camera.raw_format = 'rgb'
+            self.camera.start_preview()
+            time.sleep(2)
+            self.camera.capture(name, 'raw')
             
             dalcamera.set_last_picture_id(index + 1)
             dalpicture.setpicture(name)
