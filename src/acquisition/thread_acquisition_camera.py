@@ -6,18 +6,17 @@ Date : 17/09/2016
 
 import sqlite3
 import threading
-import time
+from time import sleep
 
 from lib import com_camera, com_config, com_gpio_inout, com_logger
 
 
 class ThreadAcquisitionCamera(threading.Thread):
-    def __init__(self, name, lock, delay, counter):
+    def __init__(self, name, lock, delay):
         super().__init__()
         conf = com_config.Config()
         config = conf.getconfig()
         self.name = name
-        self.counter = counter
         self.delay = delay
         self.lock = lock
         self.database = config['SQLITE']['database']
@@ -30,10 +29,10 @@ class ThreadAcquisitionCamera(threading.Thread):
         logger.info('Start')
         self.getpicture()
         logger.info('Stop')
-
+    
     def getpicture(self):
         instance = com_camera.Camera('PICTURE')
-        while self.counter and not self.gpioinout.getstop():
+        while True:
             self.lock.acquire()
             connection = sqlite3.Connection(self.database)
             cursor = connection.cursor()
@@ -44,5 +43,4 @@ class ThreadAcquisitionCamera(threading.Thread):
             gpioinout = com_gpio_inout.GPIOINOT()
             gpioinout.blink(0.04, 1)
 
-            self.counter -= 1
-            time.sleep(self.delay)
+            sleep(self.delay)

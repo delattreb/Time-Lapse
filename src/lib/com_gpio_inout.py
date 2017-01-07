@@ -25,9 +25,12 @@ class GPIOINOT:
         self.start_acquisition = int(self.config['GPIO']['START_ACQUISITION'])
         self.gpio.setuppud(self.start_acquisition, self.gpio.IN, self.gpio.PUD_DOWN)
 
-        # STOP ACQUISITION
-        self.stop_acquisition = int(self.config['GPIO']['STOP_ACQUISITION'])
-        self.gpio.setuppud(self.stop_acquisition, self.gpio.IN, self.gpio.PUD_DOWN)
+        # CONFIG ACQUISITION
+        self.config_acquisition = int(self.config['GPIO']['CONFIG_ACQUISITION'])
+        self.gpio.setuppud(self.config_acquisition, self.gpio.IN, self.gpio.PUD_DOWN)
+
+    def cleanup(self):
+        self.gpio.cleanup()
     
     def setacquisition(self, state):
         self.gpio.setio(self.led_acquisition, state)
@@ -41,12 +44,12 @@ class GPIOINOT:
         if state:
             logger = com_logger.Logger('START_ACQUISITION')
             logger.debug('INPUT START')
-    
+
         return state
 
-    def getstop(self):
-        state = self.gpio.getio(self.stop_acquisition)
-    
+    def getconfigacquisition(self):
+        state = self.gpio.getio(self.config_acquisition)
+        
         if state:
             logger = com_logger.Logger('STOP_ACQUISITION')
             logger.debug('INPUT STOP')
@@ -55,13 +58,8 @@ class GPIOINOT:
     
     def blink(self, duration, repetition):
         blink_duration = duration
-        cpt = 0
-        while cpt < repetition:
+        for i in range(repetition):
             self.setacquisition(True)
             time.sleep(blink_duration)
             self.setacquisition(False)
             time.sleep(blink_duration)
-            cpt += 1
-    
-    def cleanup(self):
-        self.gpio.cleanup()

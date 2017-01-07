@@ -61,10 +61,10 @@ class Config:
         # GPIO
         self.config['GPIO'] = {}
         # LED
-        self.config['GPIO']['LED_ACQUISITION'] = '22'
+        self.config['GPIO']['LED_ACQUISITION'] = '17'
         # INPUT
-        self.config['GPIO']['START_ACQUISITION'] = '17'
-        self.config['GPIO']['STOP_ACQUISITION'] = '27'
+        self.config['GPIO']['CONFIG_ACQUISITION'] = '27'
+        self.config['GPIO']['START_ACQUISITION'] = '22'
         # endregion
 
         # Export
