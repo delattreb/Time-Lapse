@@ -47,6 +47,7 @@ class Config:
         self.config['CAMERA']['rotation'] = '180'  # 0 - 359
         self.config['CAMERA']['brightness'] = '50'  # 0 - 100
         self.config['CAMERA']['contrast'] = '0'  # -100 - 100
+        self.config['CAMERA']['raw'] = 'yuv'  # yuv rgb rgba bgr bgra
         # negative, solarise, posterize, whiteboard, blackboard, sketch, denoise, emboss, oilpaint, hatch, gpen, pastel, watercolour, film, blur, saturation
         self.config['CAMERA']['image_effect'] = ''
         # auto, night, nightpreview, backlight, spotlight, sports, snow, beach, verylong, fixedfps, antishake, fireworks

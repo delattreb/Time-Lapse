@@ -54,6 +54,7 @@ class Camera:
             self.camera.exposure_mode = config['CAMERA']['exposure_mode']
             self.camera.meter_mode = config['CAMERA']['meter_mode']
             self.camera.awb_mode = config['CAMERA']['awb']
+            self.camera.raw_format = config['CAMERA']['raw']
             self.path = config['CAMERA']['picture_path']
             self.camera.iso = int(config['CAMERA']['ISO'])
     
@@ -63,11 +64,8 @@ class Camera:
             dalpicture = dal_picture.DALPicture(connection, cursor)
             
             index = dalcamera.get_last_picture_id()
-
             name = self.path + self.imgName + str(index) + '.jpg'
-            self.camera.raw_format = 'bgra'
             self.camera.capture(name)
-            
             dalcamera.set_last_picture_id(index + 1)
             dalpicture.setpicture(name)
             
