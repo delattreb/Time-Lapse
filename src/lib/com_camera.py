@@ -10,6 +10,7 @@ try:
     from picamera import PiCamera
 except Exception as exp:
     PiCamera = None
+from time import sleep
 
 from dal import dal_camera, dal_picture
 from lib import com_config, com_logger
@@ -57,6 +58,7 @@ class Camera:
             self.camera.raw_format = config['CAMERA']['raw']
             self.path = config['CAMERA']['picture_path']
             self.camera.iso = int(config['CAMERA']['ISO'])
+            self.quality = int(config['CAMERA']['jpegquality'])
     
     def getpicture(self, connection, cursor):
         if PiCamera is not None:
@@ -65,7 +67,8 @@ class Camera:
             
             index = dalcamera.get_last_picture_id()
             name = self.path + self.imgName + str(index) + '.jpg'
-            self.camera.capture(name)
+            self.camera.capture(name, bayer = True, quality = self.quality)
+            
             dalcamera.set_last_picture_id(index + 1)
             dalpicture.setpicture(name)
             

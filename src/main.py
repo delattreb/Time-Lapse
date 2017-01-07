@@ -5,7 +5,6 @@ Date : 03/12/2016
 """
 
 import threading
-from time import sleep
 
 from acquisition import thread_acquisition_camera
 from lib import com_config, com_gpio_inout, com_logger
@@ -36,7 +35,6 @@ while not gpioinout.getstart():
             delayqcquition = 0
         gpioinout.blink(0.2, delayqcquition + 1)
         logger.debug('Delay: ' + str(tabdelay[delayqcquition]))
-    sleep(0.1)
 
 logger.info('Start acquition - Delay: ' + str(tabdelay[delayqcquition]))
 gpioinout.blink(0.3, 5)

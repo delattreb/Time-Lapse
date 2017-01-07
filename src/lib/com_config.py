@@ -31,7 +31,7 @@ class Config:
         
         # LOGGER
         self.config['LOGGER'] = {}
-        self.config['LOGGER']['levelconsole'] = '10'  # DEBUG=10 INFO=20 WARNING=30 ERROR=40 #CRITICAL=50
+        self.config['LOGGER']['levelconsole'] = '20'  # DEBUG=10 INFO=20 WARNING=30 ERROR=40 #CRITICAL=50
         self.config['LOGGER']['levelfile'] = '20'
         self.config['LOGGER']['logfile'] = 'log'
         self.config['LOGGER']['logfilesize'] = '1000000'
@@ -47,15 +47,12 @@ class Config:
         self.config['CAMERA']['rotation'] = '180'  # 0 - 359
         self.config['CAMERA']['brightness'] = '50'  # 0 - 100
         self.config['CAMERA']['contrast'] = '0'  # -100 - 100
-        self.config['CAMERA']['raw'] = 'yuv'  # yuv rgb rgba bgr bgra
-        # negative, solarise, posterize, whiteboard, blackboard, sketch, denoise, emboss, oilpaint, hatch, gpen, pastel, watercolour, film, blur, saturation
-        self.config['CAMERA']['image_effect'] = ''
-        # auto, night, nightpreview, backlight, spotlight, sports, snow, beach, verylong, fixedfps, antishake, fireworks
-        self.config['CAMERA']['exposure_mode'] = 'auto'
-        # average, spot, backlit, matrix
-        self.config['CAMERA']['meter_mode'] = 'average'
-        # off, auto, sun, cloud, shade, tungsten, fluorescent, incandescent, flash, horizon
-        self.config['CAMERA']['awb'] = 'auto'
+        self.config['CAMERA']['raw'] = 'rgba'  # yuv rgb rgba bgr bgra
+        self.config['CAMERA']['jpegquality'] = '100'
+        self.config['CAMERA']['image_effect'] = ''  # negative, solarise, posterize, whiteboard, blackboard, sketch, denoise, emboss, oilpaint, hatch, gpen, pastel, watercolour, film, blur, saturation
+        self.config['CAMERA']['exposure_mode'] = 'auto'  # auto, night, nightpreview, backlight, spotlight, sports, snow, beach, verylong, fixedfps, antishake, fireworks
+        self.config['CAMERA']['meter_mode'] = 'average'  # average, spot, backlit, matrix
+        self.config['CAMERA']['awb'] = 'auto'  # off, auto, sun, cloud, shade, tungsten, fluorescent, incandescent, flash, horizon
         self.config['CAMERA']['picture_path'] = 'pictures/'
         
         # GPIO
