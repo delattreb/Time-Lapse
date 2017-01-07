@@ -34,9 +34,11 @@ class ThreadAcquisitionCamera(threading.Thread):
         instance = com_camera.Camera('PICTURE')
         while True:
             self.lock.acquire()
+
             connection = sqlite3.Connection(self.database)
             cursor = connection.cursor()
             instance.getpicture(connection, cursor)
+
             self.lock.release()
 
             # Blink at each picture taken

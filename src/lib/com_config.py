@@ -38,14 +38,15 @@ class Config:
 
         # Camera v8M 3280x2464 -- v5M 2592x1944
         self.config['CAMERA'] = {}
+        self.config['CAMERA']['ISO'] = '100'  # 100 - 800
         self.config['CAMERA']['pic_resolution_x'] = '2592'
         self.config['CAMERA']['pic_resolution_y'] = '1944'
         self.config['CAMERA']['vid_resolution_x'] = '1920'
         self.config['CAMERA']['vid_resolution_y'] = '1080'
         self.config['CAMERA']['framerate'] = '30'
-        self.config['CAMERA']['rotation'] = '0'
-        self.config['CAMERA']['brightness'] = '0'
-        self.config['CAMERA']['contrast'] = '0'
+        self.config['CAMERA']['rotation'] = '180'  # 0 - 359
+        self.config['CAMERA']['brightness'] = '50'  # 0 - 100
+        self.config['CAMERA']['contrast'] = '0'  # -100 - 100
         # negative, solarise, posterize, whiteboard, blackboard, sketch, denoise, emboss, oilpaint, hatch, gpen, pastel, watercolour, film, blur, saturation
         self.config['CAMERA']['image_effect'] = ''
         # auto, night, nightpreview, backlight, spotlight, sports, snow, beach, verylong, fixedfps, antishake, fireworks
@@ -55,8 +56,6 @@ class Config:
         # off, auto, sun, cloud, shade, tungsten, fluorescent, incandescent, flash, horizon
         self.config['CAMERA']['awb'] = 'auto'
         self.config['CAMERA']['picture_path'] = 'pictures/'
-        self.config['CAMERA']['delay'] = '10'
-        self.config['CAMERA']['nb'] = str(int(((acquisitionduration * 3600) / float(self.config['CAMERA']['delay']))))
         
         # GPIO
         self.config['GPIO'] = {}

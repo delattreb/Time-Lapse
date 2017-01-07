@@ -43,7 +43,7 @@ class GPIOINOT:
         
         if state:
             logger = com_logger.Logger('START_ACQUISITION')
-            logger.debug('INPUT START')
+            logger.debug('INPUT Start')
 
         return state
 
@@ -52,7 +52,7 @@ class GPIOINOT:
         
         if state:
             logger = com_logger.Logger('STOP_ACQUISITION')
-            logger.debug('INPUT STOP')
+            logger.debug('INPUT Config')
         
         return state
     
