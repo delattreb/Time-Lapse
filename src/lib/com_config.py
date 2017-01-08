@@ -20,8 +20,8 @@ class Config:
         # region Config
         # Version
         self.config['APPLICATION'] = {}
-        self.config['APPLICATION']['name'] = 'Time Lapse'
-        self.config['APPLICATION']['version'] = '1.0.0'
+        self.config['APPLICATION']['name'] = 'Time-Lapse'
+        self.config['APPLICATION']['version'] = '1.2.1'
         self.config['APPLICATION']['author'] = 'c Bruno DELATTRE'
         self.config['APPLICATION']['splashduration'] = '5'
 

@@ -16,7 +16,7 @@ config = conf.getconfig()
 
 # Log
 logger = com_logger.Logger('TIMELAPSE')
-logger.info(config['APPLICATION']['name'] + '' + config['APPLICATION']['version'] + ' ' + 'start')
+logger.info(config['APPLICATION']['name'] + ' ' + config['APPLICATION']['version'] + ' ' + 'Start')
 
 # Init
 gpioinout = com_gpio_inout.GPIOINOT()
@@ -44,4 +44,4 @@ camera_thread = thread_acquisition_camera.ThreadAcquisitionCamera("Camera Thread
 camera_thread.start()
 camera_thread.join()
 gpioinout.blink(0.3, 3)
-logger.info('Application stop')
+logger.info(config['APPLICATION']['name'] + ' ' + config['APPLICATION']['version'] + ' ' + 'Stop')
