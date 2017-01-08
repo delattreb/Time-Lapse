@@ -33,7 +33,7 @@ class ThreadAcquisitionCamera(threading.Thread):
     def getpicture(self):
         gpioinout = com_gpio_inout.GPIOINOT()
         instance = com_camera.Camera('PICTURE')
-        nextacq = time.time() + self.delay
+        nextacq = time.time()
         while not gpioinout.getstart():
             if time.time() >= nextacq:
                 nextacq += self.delay

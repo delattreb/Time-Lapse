@@ -22,7 +22,7 @@ logger.info(config['APPLICATION']['name'] + '' + config['APPLICATION']['version'
 gpioinout = com_gpio_inout.GPIOINOT()
 delayqcquition = 0
 tabdelay = [5, 10, 15, 20, 25]
-gpioinout.blink(0.2, tabdelay[delayqcquition])
+gpioinout.blink(0.3, 3)
 
 # Waiting for Init acquisition
 logger.info('Wait for start')

@@ -32,7 +32,7 @@ class Config:
         # LOGGER
         self.config['LOGGER'] = {}
         self.config['LOGGER']['levelconsole'] = '20'  # DEBUG=10 INFO=20 WARNING=30 ERROR=40 #CRITICAL=50
-        self.config['LOGGER']['levelfile'] = '20'
+        self.config['LOGGER']['levelfile'] = '30'
         self.config['LOGGER']['logfile'] = 'log'
         self.config['LOGGER']['logfilesize'] = '1000000'
 
