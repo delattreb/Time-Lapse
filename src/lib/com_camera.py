@@ -67,6 +67,8 @@ class Camera:
             
             index = dalcamera.get_last_picture_id()
             name = self.path + self.imgName + str(index) + '.jpg'
+            self.camera.start_preview()
+            sleep(2)
             self.camera.capture(name, bayer = True, quality = self.quality)
             
             dalcamera.set_last_picture_id(index + 1)

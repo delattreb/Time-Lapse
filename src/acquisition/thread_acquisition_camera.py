@@ -45,4 +45,4 @@ class ThreadAcquisitionCamera(threading.Thread):
             gpioinout = com_gpio_inout.GPIOINOT()
             gpioinout.blink(0.04, 1)
 
-            sleep(self.delay)
+            sleep(self.delay - 3)
