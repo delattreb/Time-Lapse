@@ -6,7 +6,7 @@ Date : 17/09/2016
 
 import sqlite3
 import threading
-from time import sleep
+import time
 
 from lib import com_camera, com_config, com_gpio_inout, com_logger
 
@@ -31,18 +31,19 @@ class ThreadAcquisitionCamera(threading.Thread):
         logger.info('Stop')
     
     def getpicture(self):
+        gpioinout = com_gpio_inout.GPIOINOT()
         instance = com_camera.Camera('PICTURE')
-        while True:
-            self.lock.acquire()
-
-            connection = sqlite3.Connection(self.database)
-            cursor = connection.cursor()
-            instance.getpicture(connection, cursor)
-
-            self.lock.release()
-
-            # Blink at each picture taken
-            gpioinout = com_gpio_inout.GPIOINOT()
-            gpioinout.blink(0.04, 1)
-
-            sleep(self.delay - 3)
+        nextacq = time.time() + self.delay
+        while not gpioinout.getstart():
+            if time.time() >= nextacq:
+                nextacq += self.delay
+                self.lock.acquire()
+            
+                connection = sqlite3.Connection(self.database)
+                cursor = connection.cursor()
+                instance.getpicture(connection, cursor)
+            
+                self.lock.release()
+            
+                # Blink at each picture taken
+                gpioinout.blink(0.04, 1)

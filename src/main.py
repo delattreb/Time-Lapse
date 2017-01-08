@@ -37,11 +37,11 @@ while not gpioinout.getstart():
         logger.debug('Delay: ' + str(tabdelay[delayqcquition]))
 
 logger.info('Start acquition - Delay: ' + str(tabdelay[delayqcquition]))
-gpioinout.blink(0.3, 5)
+gpioinout.blink(0.8, 3)
 
 threadlock = threading.Lock()
 camera_thread = thread_acquisition_camera.ThreadAcquisitionCamera("Camera Thread", threadlock, tabdelay[delayqcquition])
 camera_thread.start()
 camera_thread.join()
-
+gpioinout.blink(0.3, 3)
 logger.info('Application stop')
