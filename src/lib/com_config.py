@@ -15,13 +15,11 @@ class Config:
         self.config = configparser.ConfigParser()
 
     def setconfig(self):
-        acquisitionduration = 3  # In hours
-        
         # region Config
         # Version
         self.config['APPLICATION'] = {}
         self.config['APPLICATION']['name'] = 'Time-Lapse'
-        self.config['APPLICATION']['version'] = '1.2.1'
+        self.config['APPLICATION']['version'] = '1.3.1'
         self.config['APPLICATION']['author'] = 'c Bruno DELATTRE'
         self.config['APPLICATION']['splashduration'] = '5'
 
@@ -47,7 +45,7 @@ class Config:
         self.config['CAMERA']['rotation'] = '180'  # 0 - 359
         self.config['CAMERA']['brightness'] = '50'  # 0 - 100
         self.config['CAMERA']['contrast'] = '0'  # -100 - 100
-        self.config['CAMERA']['raw'] = 'rgb'  # yuv rgb rgba bgr bgra
+        self.config['CAMERA']['raw'] = ''  # yuv rgb rgba bgr bgra
         self.config['CAMERA']['jpegquality'] = '100'
         self.config['CAMERA']['image_effect'] = ''  # negative, solarise, posterize, whiteboard, blackboard, sketch, denoise, emboss, oilpaint, hatch, gpen, pastel, watercolour, film, blur, saturation
         self.config['CAMERA']['exposure_mode'] = 'auto'  # auto, night, nightpreview, backlight, spotlight, sports, snow, beach, verylong, fixedfps, antishake, fireworks

@@ -21,8 +21,8 @@ logger.info(config['APPLICATION']['name'] + ' ' + config['APPLICATION']['version
 # Init
 gpioinout = com_gpio_inout.GPIOINOT()
 delayqcquition = 0
-tabdelay = [5, 10, 15, 20, 25]
-gpioinout.blink(0.3, 3)
+tabdelay = [10, 12, 14, 16, 18, 20]
+gpioinout.blink(0.2, 3)
 
 # Waiting for Init acquisition
 logger.info('Wait for start')
@@ -33,10 +33,10 @@ while not gpioinout.getstart():
         delayqcquition += 1
         if delayqcquition >= len(tabdelay):
             delayqcquition = 0
-        gpioinout.blink(0.2, delayqcquition + 1)
+        gpioinout.blink(0.15, delayqcquition + 1)
         logger.debug('Delay: ' + str(tabdelay[delayqcquition]))
 
-logger.info('Start acquition - Delay: ' + str(tabdelay[delayqcquition]))
+logger.warning('Start acquition - Delay: ' + str(tabdelay[delayqcquition]))
 gpioinout.blink(0.8, 3)
 
 threadlock = threading.Lock()

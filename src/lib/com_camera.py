@@ -55,7 +55,8 @@ class Camera:
             self.camera.exposure_mode = config['CAMERA']['exposure_mode']
             self.camera.meter_mode = config['CAMERA']['meter_mode']
             self.camera.awb_mode = config['CAMERA']['awb']
-            self.camera.raw_format = config['CAMERA']['raw']
+            if len(config['CAMERA']['raw']) > 0:
+                self.camera.raw_format = config['CAMERA']['raw']
             self.path = config['CAMERA']['picture_path']
             self.camera.iso = int(config['CAMERA']['ISO'])
             self.quality = int(config['CAMERA']['jpegquality'])

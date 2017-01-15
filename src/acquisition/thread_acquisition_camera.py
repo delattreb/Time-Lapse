@@ -20,7 +20,8 @@ class ThreadAcquisitionCamera(threading.Thread):
         self.delay = delay
         self.lock = lock
         self.database = config['SQLITE']['database']
-
+        self.instance = com_camera.Camera('PICTURE')
+        
         # GPIO
         self.gpioinout = com_gpio_inout.GPIOINOT()
     
@@ -32,18 +33,17 @@ class ThreadAcquisitionCamera(threading.Thread):
     
     def getpicture(self):
         gpioinout = com_gpio_inout.GPIOINOT()
-        instance = com_camera.Camera('PICTURE')
         nextacq = time.time()
         while not gpioinout.getstart():
             if time.time() >= nextacq:
                 nextacq += self.delay
                 self.lock.acquire()
-            
+
                 connection = sqlite3.Connection(self.database)
                 cursor = connection.cursor()
-                instance.getpicture(connection, cursor)
-            
+                self.instance.getpicture(connection, cursor)
+                
                 self.lock.release()
-            
+
                 # Blink at each picture taken
                 gpioinout.blink(0.04, 1)
