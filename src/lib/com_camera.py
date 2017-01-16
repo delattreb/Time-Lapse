@@ -60,6 +60,7 @@ class Camera:
             self.path = config['CAMERA']['picture_path']
             self.camera.iso = int(config['CAMERA']['ISO'])
             self.quality = int(config['CAMERA']['jpegquality'])
+            self.config = config
     
     def getpicture(self, connection, cursor):
         if PiCamera is not None:
@@ -70,7 +71,10 @@ class Camera:
             name = self.path + self.imgName + str(index) + '.jpg'
             self.camera.start_preview()
             sleep(2)
-            self.camera.capture(name, bayer = True, quality = self.quality)
+            if len(self.config['CAMERA']['raw']) > 0:
+                self.camera.capture(name, 'raw')
+            else:
+                self.camera.capture(name, bayer = True, quality = self.quality)
             
             dalcamera.set_last_picture_id(index + 1)
             dalpicture.setpicture(name)
