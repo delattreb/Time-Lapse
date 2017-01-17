@@ -12,11 +12,10 @@ from lib import com_camera, com_config, com_gpio_inout, com_logger
 
 
 class ThreadAcquisitionCamera(threading.Thread):
-    def __init__(self, name, lock, delay):
+    def __init__(self, lock, delay):
         super().__init__()
         conf = com_config.Config()
         config = conf.getconfig()
-        self.name = name
         self.delay = delay
         self.lock = lock
         self.database = config['SQLITE']['database']
@@ -32,9 +31,8 @@ class ThreadAcquisitionCamera(threading.Thread):
         logger.info('Stop')
     
     def getpicture(self):
-        gpioinout = com_gpio_inout.GPIOINOT()
         nextacq = time.time()
-        while not gpioinout.getstart():
+        while not self.gpioinout.getstart():
             if time.time() >= nextacq:
                 nextacq += self.delay
                 self.lock.acquire()
@@ -46,4 +44,4 @@ class ThreadAcquisitionCamera(threading.Thread):
                 self.lock.release()
 
                 # Blink at each picture taken
-                gpioinout.blink(0.04, 1)
+                self.gpioinout.blink(0.04, 1)

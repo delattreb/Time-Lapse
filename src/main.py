@@ -6,7 +6,7 @@ Date : 03/12/2016
 
 import threading
 
-from acquisition import thread_acquisition_camera
+from acquisition import thread_acquisition_camera_timer
 from lib import com_config, com_gpio_inout, com_logger
 
 # Config
@@ -40,8 +40,13 @@ logger.warning('Start acquition - Delay: ' + str(tabdelay[delayqcquition]))
 gpioinout.blink(0.8, 3)
 
 threadlock = threading.Lock()
-camera_thread = thread_acquisition_camera.ThreadAcquisitionCamera("Camera Thread", threadlock, tabdelay[delayqcquition])
+# Last version
+# camera_thread = thread_acquisition_camera.ThreadAcquisitionCamera(threadlock, tabdelay[delayqcquition])
+# camera_thread.start()
+
+# New version
+camera_thread = thread_acquisition_camera_timer.ThreadAcquisitionCameraTimer(threadlock, tabdelay[delayqcquition])
 camera_thread.start()
-camera_thread.join()
+
 gpioinout.blink(0.3, 3)
 logger.info(config['APPLICATION']['name'] + ' ' + config['APPLICATION']['version'] + ' ' + 'Stop')

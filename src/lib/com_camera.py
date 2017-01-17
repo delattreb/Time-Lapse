@@ -61,6 +61,7 @@ class Camera:
             self.camera.iso = int(config['CAMERA']['ISO'])
             self.quality = int(config['CAMERA']['jpegquality'])
             self.config = config
+            self.logger = com_logger.Logger(mode)
     
     def getpicture(self, connection, cursor):
         if PiCamera is not None:
@@ -78,9 +79,8 @@ class Camera:
             
             dalcamera.set_last_picture_id(index + 1)
             dalpicture.setpicture(name)
-            
-            logger = com_logger.Logger('CAMERA')
-            logger.info('Picture taken:' + name)
+
+            self.logger.info('Picture taken:' + name)
     
     def getvideo(self, duration, connection, cursor):
         if PiCamera is not None:
