@@ -31,7 +31,7 @@ class Camera:
     @is_plugged
     def __init__(self, mode):
         if PiCamera is not None:
-            self.imgName = 'PIC' + str(randint(1000, 9000)) + '_'
+            self.imgName = 'PIC' + str(randint(1000, 9999)) + '_'
             
             conf = com_config.Config()
             config = conf.getconfig()

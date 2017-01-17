@@ -19,7 +19,7 @@ logger.info(config['APPLICATION']['name'] + ' ' + config['APPLICATION']['version
 # Init
 gpioinout = com_gpio_inout.GPIOINOT()
 delayqcquition = 0
-tabdelay = [2, 4, 6, 8, 10]
+tabdelay = [4, 6, 6, 10, 12]
 timedelay = 3
 gpioinout.blink(0.2, 3)
 
