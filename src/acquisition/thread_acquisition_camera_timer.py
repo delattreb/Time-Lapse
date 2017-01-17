@@ -11,10 +11,9 @@ from lib import com_camera, com_config, com_gpio_inout
 
 
 class ThreadAcquisitionCameraTimer:
-    def __init__(self, lock, delay):
+    def __init__(self, delay):
         super().__init__()
         self.delay = delay
-        self.lock = lock
         self.hFunction = self.getpicture
         self.thread = Timer(self.delay, self.handle_function)
         
@@ -38,13 +37,10 @@ class ThreadAcquisitionCameraTimer:
         self.thread.cancel()
     
     def getpicture(self):
-        self.lock.acquire()
         
         connection = sqlite3.Connection(self.database)
         cursor = connection.cursor()
         self.instance.getpicture(connection, cursor)
-        
-        self.lock.release()
-        
+
         # Blink at each picture taken
         self.gpioinout.blink(0.04, 1)
